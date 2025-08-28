@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://use.typekit.net/jxp7qvp.css">
+		<!-- Newsletter signup handled via Substack embed -->
+		<script>
+			// Apply theme immediately to prevent flash
+			try {
+				const theme = localStorage.getItem('theme');
+				if (theme === 'dark') {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			} catch (e) {
+				// Ignore errors in SSR
+			}
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-hydrate data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
