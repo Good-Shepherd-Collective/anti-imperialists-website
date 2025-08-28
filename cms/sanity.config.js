@@ -13,6 +13,15 @@ export default defineConfig({
   projectId: 'opgd2bhj',
   dataset: 'production',
 
+  cors: {
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:4173', 
+      'https://anti-imperialists-website.vercel.app',
+      'https://*.vercel.app'
+    ]
+  },
+
   plugins: [
     deskTool({
       structure
