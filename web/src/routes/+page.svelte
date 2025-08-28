@@ -3,6 +3,10 @@
 	let pointsOfUnity = data.pointsOfUnity;
 </script>
 
+<svelte:head>
+	<title>Home - Anti-Imperialist Scholars Collective</title>
+</svelte:head>
+
 <main class="bg-white dark:bg-black text-black dark:text-white">
 	<div class="container mx-auto px-4 max-w-6xl">
 		<section class="pt-12 md:pt-20 lg:pt-28">
