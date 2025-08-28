@@ -2,7 +2,7 @@
   "buildCommand": "vite build",
   "outputDirectory": "build",
   "installCommand": "npm install",
-  "framework": "sveltekit",
+  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
