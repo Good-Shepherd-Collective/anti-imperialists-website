@@ -3,6 +3,7 @@ import {blog} from './documents/blog'
 import {communityLogo} from './documents/communityLogo'
 import {memberBio} from './documents/memberBio'
 import {imageBlock} from './objects/imageBlock'
+import {author} from './objects/author'
 import {photos} from './documents/photos'
 import {submissionInstructions} from './documents/submissionInstructions'
 import {editorialStatement} from './documents/editorialStatement'
@@ -15,6 +16,7 @@ export const schemaTypes = [
   communityLogo,
   memberBio,
   imageBlock,
+  author,
   photos,
   submissionInstructions,
   editorialStatement,

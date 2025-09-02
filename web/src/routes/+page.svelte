@@ -67,9 +67,23 @@
 							{#each data.blogs as post}
 								<article class="mb-4 md:mb-8 p-4 md:p-6 border-2 border-[#2E8B57] transform transition-transform hover:scale-105">
 									<h4 class="font-hero text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3">{post.title}</h4>
-									<span class="inline-block bg-[#FF6347] text-black text-xs font-bold px-2 py-1 rounded-sm uppercase tracking-wider mb-2">Original Content</span>
-									{#if post.author}
-										<p class="text-sm text-gray-400">By {post.author}</p>
+									{#if post.volumeNumber}
+										<p class="text-sm text-gray-400 mb-1">Volume {post.volumeNumber}{post.volumeIssue ? ` - Issue ${post.volumeIssue}` : ''}</p>
+									{/if}
+									{#if post.authorName}
+										<p class="text-sm text-gray-400 mb-2">By {post.authorName}</p>
+									{/if}
+									{#if (post.tags && post.tags.length > 0) || post.featured}
+										<div class="flex flex-wrap gap-2 mb-3">
+											{#if post.featured}
+												<span class="inline-block bg-[#FF6347] text-black text-xs font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Original Content</span>
+											{/if}
+											{#if post.tags && post.tags.length > 0}
+												{#each post.tags as tag}
+													<span class="inline-block bg-[#2E8B57] text-white text-xs px-2 py-1 rounded-full">{tag}</span>
+												{/each}
+											{/if}
+										</div>
 									{/if}
 									<a href="/blog/{post.slug.current}" class="inline-block mt-2 hover:underline font-bold uppercase tracking-wider">Read more →</a>
 								</article>

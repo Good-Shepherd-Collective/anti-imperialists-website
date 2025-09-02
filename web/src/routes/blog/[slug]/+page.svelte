@@ -100,10 +100,10 @@
               {blog.title}
             </h1>
             
-            {#if blog.author || blog.publishedAt}
+            {#if blog.authorName || blog.publishedAt}
               <div class="border-t border-b border-[#2E8B57] py-4 text-gray-400 dark:text-gray-300 flex items-center justify-center space-x-4">
-                {#if blog.author}
-                  <span>By {blog.author}</span>
+                {#if blog.authorName}
+                  <span>By {blog.authorName}</span>
                 {/if}
                 {#if blog.publishedAt}
                   <span class="text-[#FF6347]">•</span>

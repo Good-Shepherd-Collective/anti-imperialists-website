@@ -14,7 +14,7 @@
   <div class="container mx-auto max-w-6xl relative">
     <!-- Desktop Navigation -->
     <ul class="hidden md:flex justify-center space-x-8 py-2 text-sm md:text-base tracking-widest">
-      <li><a href="/" class="hover:text-[#FF6347] transition-colors duration-300 {$page.url.pathname === '/' ? 'italic' : ''}">ABOUT</a></li>
+      <li><a href="/" class="hover:text-[#FF6347] transition-colors duration-300 {$page.url.pathname === '/' ? 'italic' : ''}">HOME</a></li>
       <li><a href="/blog" class="hover:text-[#FF6347] transition-colors duration-300 {$page.url.pathname === '/blog/' ? 'italic' : ''}">BLOG</a></li>
       <li><a href="/members" class="hover:text-[#FF6347] transition-colors duration-300 {$page.url.pathname === '/members/' ? 'italic' : ''}">MEMBERS</a></li>
       <li><a href="/points-of-unity" class="hover:text-[#FF6347] transition-colors duration-300 {$page.url.pathname === '/points-of-unity/' ? 'italic' : ''}">PRINCIPLES OF UNITY</a></li>
@@ -82,7 +82,7 @@
               class="block px-4 py-3 hover:text-[#FF6347] transition-colors duration-300 {$page.url.pathname === '/' ? 'text-[#FF6347] italic' : ''}"
               on:click={() => isMenuOpen = false}
             >
-              ABOUT
+              HOME
             </a>
           </li>
           <li>

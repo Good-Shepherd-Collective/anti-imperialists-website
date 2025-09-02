@@ -34,21 +34,21 @@
 
 	function sortPosts(posts) {
 		return [...posts].sort((a, b) => {
-			// First sort by featured status - featured posts come first
+			// First sort by order field (if defined)
+			if (a.order !== b.order) {
+				// Lower order numbers come first
+				const orderA = a.order ?? 999;
+				const orderB = b.order ?? 999;
+				return orderA - orderB;
+			}
+			
+			// Then sort by featured status - featured posts come first
 			if (a.featured !== b.featured) {
 				return a.featured ? -1 : 1;
 			}
 			
-			// Then sort by author last name
-			const getLastName = (post) => {
-				if (!post.author) return '';
-				const nameParts = post.author.split(' ');
-				return nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
-			};
-			
-			const lastNameA = getLastName(a);
-			const lastNameB = getLastName(b);
-			return lastNameA.localeCompare(lastNameB);
+			// Finally sort by publish date (newest first)
+			return new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0);
 		});
 	}
 
@@ -146,7 +146,7 @@
 								class="w-full bg-white dark:bg-black border-2 border-[#FF6347] p-4 flex justify-between items-center text-left hover:bg-[#FF6347] hover:text-white transition-colors duration-300 shadow-lg"
 								on:click={() => toggleVolume(volume._id)}
 							>
-								<h2 class="font-hero text-2xl uppercase">{`${volume.title} ${volume.number}`}</h2>
+								<h2 class="font-hero text-2xl uppercase">Volume {volume.number} - {volume.title}</h2>
 								<span class="text-2xl transform transition-transform duration-300" class:rotate-180={expandedIds.includes(volume._id)}>
 									↓
 								</span>
@@ -158,11 +158,21 @@
 										<article class="bg-white dark:bg-black border-2 border-[#2E8B57] p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-lg min-h-[200px] flex flex-col justify-between shadow-lg">
 											<div>
 												<h3 class="font-hero text-xl font-semibold mb-3">{post.title}</h3>
-												{#if post.featured}
-													<span class="inline-block bg-[#FF6347] text-white text-xs font-bold px-2 py-1 rounded-sm uppercase tracking-wider mb-2">Original Content</span>
+												<p class="text-sm text-gray-400 mb-1">Volume {volume.number}{volume.title ? ` - ${volume.title}` : ''}</p>
+												{#if post.authorName}
+													<p class="text-sm text-gray-400 mb-2">By {post.authorName}</p>
 												{/if}
-												{#if post.author}
-													<p class="text-sm text-gray-600 dark:text-gray-400">By {post.author}</p>
+												{#if (post.tags && post.tags.length > 0) || post.featured}
+													<div class="flex flex-wrap gap-2 mb-3">
+														{#if post.featured}
+															<span class="inline-block bg-[#FF6347] text-black text-xs font-bold px-2 py-1 rounded-sm uppercase tracking-wider">Original Content</span>
+														{/if}
+														{#if post.tags && post.tags.length > 0}
+															{#each post.tags as tag}
+																<span class="inline-block bg-[#2E8B57] text-white text-xs px-2 py-1 rounded-full">{tag}</span>
+															{/each}
+														{/if}
+													</div>
 												{/if}
 											</div>
 											<a 

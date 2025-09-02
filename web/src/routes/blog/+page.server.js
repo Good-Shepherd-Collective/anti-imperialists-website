@@ -7,7 +7,7 @@ export async function load() {
     
     const [volumes, editorialStatement, submissionInstructions, editorialBoard] = await Promise.all([
       client.fetch(`
-        *[_type == "volume"] | order(number asc) {
+        *[_type == "volume"] | order(number asc, issue desc) {
           _id,
           number,
           title,
@@ -16,14 +16,20 @@ export async function load() {
             _id,
             title,
             "slug": slug.current,
-            "author": author->name,
+            author,
+            "authorName": select(
+              author.authorType == "memberBio" => author.memberBio->name,
+              author.authorType == "standalone" => author.name
+            ),
             "featured": coalesce(featured, false),
+            tags,
             publishedAt,
+            order,
             mainImage{
               alt,
               asset->
             }
-          } | order(publishedAt desc)
+          } | order(order asc, publishedAt desc)
         }
       `),
       client.fetch(`*[_type == "editorialStatement"][0].content`),

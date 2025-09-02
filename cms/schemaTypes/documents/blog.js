@@ -99,10 +99,68 @@ export const blog = defineType({
       ]
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags'
+      },
+      description: 'Add tags to categorize your blog post'
+    }),
+    defineField({
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      description: 'Set the display order for this post (lower numbers appear first)',
+      validation: Rule => Rule.min(0).integer()
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
-      type: 'reference',
-      to: [{type: 'memberBio'}],
+      type: 'object',
+      fields: [
+        {
+          name: 'authorType',
+          title: 'Author Type',
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Member Bio', value: 'memberBio'},
+              {title: 'Non-Member', value: 'standalone'}
+            ]
+          },
+          validation: Rule => Rule.required(),
+        },
+        {
+          name: 'memberBio',
+          title: 'Member Bio',
+          type: 'reference',
+          to: [{type: 'memberBio'}],
+          hidden: ({parent}) => parent?.authorType !== 'memberBio',
+          validation: Rule => Rule.custom((value, context) => {
+            const authorType = context.parent?.authorType;
+            if (authorType === 'memberBio' && !value) {
+              return 'Member Bio is required when Author Type is Member Bio';
+            }
+            return true;
+          })
+        },
+        {
+          name: 'name',
+          title: 'Non-Member Author Name',
+          type: 'string',
+          hidden: ({parent}) => parent?.authorType !== 'standalone',
+          validation: Rule => Rule.custom((value, context) => {
+            const authorType = context.parent?.authorType;
+            if (authorType === 'standalone' && !value) {
+              return 'Name is required when Author Type is Non-Member';
+            }
+            return true;
+          })
+        }
+      ],
+      description: 'Choose member from bio or add non-member author'
     }),
     defineField({
       name: 'featured',
