@@ -109,7 +109,7 @@
 <main class="bg-white dark:bg-black text-black dark:text-white min-h-screen">
   <!-- Content wrapper with proper padding for nav -->
   <div class="pt-24 pb-8">
-    <div class="container mx-auto px-4 max-w-5xl">
+    <div class="container mx-auto px-4 max-w-screen-xl">
       {#if error}
         <div class="text-center py-16">
           <h1 class="text-4xl font-hero text-[#2E8B57] mb-4">No PDF Specified</h1>
