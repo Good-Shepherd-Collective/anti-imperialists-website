@@ -126,12 +126,12 @@
         </div>
       {:else if pdfUrl}
         <div class="mb-6 flex items-center justify-between flex-wrap gap-4">
-          <a
-            href="/blog"
-            class="text-[#FF6347] hover:text-[#2E8B57] transition-colors duration-300 inline-flex items-center"
+          <button
+            on:click={() => window.history.back()}
+            class="text-[#FF6347] hover:text-[#2E8B57] transition-colors duration-300 inline-flex items-center cursor-pointer"
           >
-            ← Back to Blog
-          </a>
+            ← Back to Article
+          </button>
 
           <a
             href={pdfUrl}
