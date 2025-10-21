@@ -1,0 +1,13 @@
+{
+	"name": "anti-imperialists-monorepo",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "cd web && npm run dev",
+		"build": "cd web && npm run build",
+		"preview": "cd web && npm run preview",
+		"lint": "cd web && npm run lint",
+		"format": "cd web && npm run format",
+		"test": "cd web && npm run test"
+	}
+}

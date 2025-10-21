@@ -23,7 +23,7 @@ export async function load() {
     } | order(volumeOrder desc, order asc, publishedAt desc)
   `)
 
-  console.log('First blog with volume data:', JSON.stringify(blogs[0], null, 2))
+  // console.log('First blog with volume data:', JSON.stringify(blogs[0], null, 2))
 
   return {
     blogs

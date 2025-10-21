@@ -172,6 +172,52 @@ export const blog = defineType({
       title: 'Published at',
       type: 'datetime',
     }),
+    defineField({
+      name: 'pdfAttachments',
+      title: 'PDF Attachments',
+      type: 'array',
+      description: 'Upload PDF files. After uploading, you can copy the URL and paste it as a link in your blog post content.',
+      of: [
+        {
+          type: 'object',
+          name: 'pdfFile',
+          title: 'PDF File',
+          fields: [
+            {
+              name: 'title',
+              type: 'string',
+              title: 'Document Title',
+              description: 'A descriptive title for this PDF',
+              validation: Rule => Rule.required()
+            },
+            {
+              name: 'description',
+              type: 'text',
+              title: 'Description',
+              description: 'Brief description of the document contents',
+              rows: 3
+            },
+            {
+              name: 'file',
+              type: 'file',
+              title: 'PDF File',
+              description: 'Upload PDF. After upload, click the file name above to see details and copy the URL field.',
+              options: {
+                accept: 'application/pdf'
+              },
+              validation: Rule => Rule.required()
+            }
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'description',
+              media: 'file'
+            }
+          }
+        }
+      ]
+    }),
   ],
   preview: {
     select: {

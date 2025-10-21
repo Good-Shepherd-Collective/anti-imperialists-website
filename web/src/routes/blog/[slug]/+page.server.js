@@ -9,7 +9,7 @@ export async function load({ params }) {
       throw error(400, 'Invalid slug')
     }
 
-    console.log('Fetching blog post with slug:', slug)
+    // console.log('Fetching blog post with slug:', slug)
 
     const blog = await client.fetch(`
       *[_type == "blog" && slug.current == $slug][0]{
@@ -47,10 +47,10 @@ export async function load({ params }) {
       }
     `, { slug })
 
-    console.log('Blog post data:', blog)
+    // console.log('Blog post data:', blog)
 
     if (!blog) {
-      console.log('Blog post not found for slug:', slug)
+      // console.log('Blog post not found for slug:', slug)
       throw error(404, 'Blog post not found')
     }
 

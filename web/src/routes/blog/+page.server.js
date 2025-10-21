@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit'
 
 export async function load() {
   try {
-    console.log('Fetching blog data...')
+    // console.log('Fetching blog data...')
     
     const [volumes, editorialStatement, submissionInstructions, editorialBoard] = await Promise.all([
       client.fetch(`
@@ -44,7 +44,7 @@ export async function load() {
       `)
     ]);
 
-    console.log('Volumes data:', volumes)
+    // console.log('Volumes data:', volumes)
 
     if (!volumes) {
       throw error(500, 'Failed to load volumes')

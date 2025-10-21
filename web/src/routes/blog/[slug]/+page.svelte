@@ -3,6 +3,7 @@
   import Nav from '$lib/components/Nav.svelte';
   import Footnote from '$lib/components/Footnote.svelte';
   import Image from '$lib/components/Image.svelte';
+  import Link from '$lib/components/Link.svelte';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
   import ListItem from '$lib/components/ListItem.svelte';
@@ -15,7 +16,7 @@
     window.scrollTo(0, 0);
   });
 
-  console.log('Blog post data in component:', blog)
+  // console.log('Blog post data in component:', blog)
 
   // Helper function to get image URL
   function getImageUrl(image) {
@@ -46,7 +47,8 @@
       block: Block
     },
     marks: {
-      footnote: Footnote
+      footnote: Footnote,
+      link: Link
     },
     listItem: ListItem
   }
