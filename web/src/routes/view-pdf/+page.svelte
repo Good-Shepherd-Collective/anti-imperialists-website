@@ -12,6 +12,7 @@
   let pdfDoc = null;
   let scale = 1.5;
   let pdfjsLib;
+  let autoFitScale = true; // Track if we should auto-fit to container width
 
   onMount(async () => {
     pdfUrl = $page.url.searchParams.get('url');
@@ -54,7 +55,17 @@
   async function renderPage(pageNum) {
     if (!pdfDoc || !canvasContainer) return;
     const page = await pdfDoc.getPage(pageNum);
-    const viewport = page.getViewport({ scale });
+
+    // Calculate scale to fit container width if auto-fit is enabled
+    let renderScale = scale;
+    if (autoFitScale) {
+      const containerWidth = canvasContainer.clientWidth - 32; // Account for padding
+      const pageViewport = page.getViewport({ scale: 1.0 });
+      renderScale = containerWidth / pageViewport.width;
+      scale = renderScale; // Update scale for zoom buttons
+    }
+
+    const viewport = page.getViewport({ scale: renderScale });
 
     // Clear container
     canvasContainer.innerHTML = '';
@@ -90,15 +101,22 @@
   }
 
   async function zoomIn() {
+    autoFitScale = false; // Disable auto-fit when manually zooming
     scale += 0.25;
     await renderPage(currentPage);
   }
 
   async function zoomOut() {
+    autoFitScale = false; // Disable auto-fit when manually zooming
     if (scale > 0.5) {
       scale -= 0.25;
       await renderPage(currentPage);
     }
+  }
+
+  async function fitToWidth() {
+    autoFitScale = true;
+    await renderPage(currentPage);
   }
 </script>
 
@@ -169,7 +187,7 @@
             </div>
 
             <!-- Zoom Controls -->
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <button
                 on:click={zoomOut}
                 class="px-4 py-2 bg-[#2E8B57] text-white rounded hover:bg-[#FF6347] transition-colors"
@@ -182,6 +200,12 @@
                 class="px-4 py-2 bg-[#2E8B57] text-white rounded hover:bg-[#FF6347] transition-colors"
               >
                 Zoom In
+              </button>
+              <button
+                on:click={fitToWidth}
+                class="px-4 py-2 bg-[#FF6347] text-white rounded hover:bg-[#2E8B57] transition-colors"
+              >
+                Fit to Width
               </button>
             </div>
           </div>
