@@ -20,7 +20,7 @@ export async function load() {
       "volumeIssue": volume->issue,
       "volumeOrder": volume->order,
       "volumePublishedAt": volume->publishedAt
-    } | order(volumeOrder desc, order asc, publishedAt desc)
+    } | order(volumeNumber desc, volumeIssue desc, order asc, publishedAt desc)
   `)
 
   // console.log('First blog with volume data:', JSON.stringify(blogs[0], null, 2))
