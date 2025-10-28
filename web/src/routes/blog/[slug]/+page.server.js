@@ -72,6 +72,6 @@ export async function load({ params }) {
 
 // This function tells SvelteKit which slugs to prerender
 export const entries = async () => {
-  const posts = await client.fetch(`*[_type == "blog"]{ "slug": slug.current }`)
+  const posts = await client.fetch(`*[_type == "blog" && !(_id in path("drafts.**"))]{ "slug": slug.current }`)
   return posts.map(post => ({ slug: post.slug }))
 } 
