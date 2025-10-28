@@ -2,7 +2,7 @@ import { client } from '$lib/sanity'
 
 export async function load() {
   const blogs = await client.fetch(`
-    *[_type == "blog"] {
+    *[_type == "blog" && !(_id in path("drafts.**"))] {
       title,
       slug,
       "preview": body[0].children[0].text,

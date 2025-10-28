@@ -12,7 +12,7 @@ export async function load() {
           number,
           title,
           description,
-          "posts": *[_type == "blog" && references(^._id)] {
+          "posts": *[_type == "blog" && !(_id in path("drafts.**")) && references(^._id)] {
             _id,
             title,
             "slug": slug.current,
