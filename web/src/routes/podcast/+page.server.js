@@ -4,6 +4,9 @@ import { error } from '@sveltejs/kit';
 const CHANNEL_HANDLE = 'penandmachete';
 const MAX_RESULTS = 12;
 
+// Disable prerendering for this page since it fetches dynamic YouTube data
+export const prerender = false;
+
 export async function load() {
   try {
     // First, get the channel ID from the handle
