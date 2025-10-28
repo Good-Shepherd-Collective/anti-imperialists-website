@@ -15,14 +15,6 @@
   <h4 class="text-xl font-bold text-black dark:text-white">{children}</h4>
 {:else if node.style === 'blockquote'}
   <blockquote class="border-l-4 border-[#2E8B57] pl-4 text-black dark:text-white">{children}</blockquote>
-{:else if node.listItem === 'bullet'}
-  <ul class="list-disc pl-4 text-black dark:text-white">
-    <li>{children}</li>
-  </ul>
-{:else if node.listItem === 'number'}
-  <ol class="list-decimal pl-4 text-black dark:text-white">
-    <li>{children}</li>
-  </ol>
 {:else}
   <p class="text-black dark:text-white">{children}</p>
 {/if} 

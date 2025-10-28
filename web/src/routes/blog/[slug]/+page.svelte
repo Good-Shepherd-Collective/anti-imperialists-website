@@ -7,6 +7,7 @@
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
   import ListItem from '$lib/components/ListItem.svelte';
+  import List from '$lib/components/List.svelte';
   import Block from '$lib/components/Block.svelte';
   export let data;
   const { blog } = data;
@@ -50,6 +51,7 @@
       footnote: Footnote,
       link: Link
     },
+    list: List,
     listItem: ListItem
   }
 </script>

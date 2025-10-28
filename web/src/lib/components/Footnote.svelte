@@ -1,11 +1,13 @@
 <script>
   export let value;
   export let portableText = { context: { footnotes: [] } };
-  
-  $: index = value.number || portableText?.context?.footnotes?.findIndex(f => f._key === value._key) + 1;
+
+  $: index = value?.number || portableText?.context?.footnotes?.findIndex(f => f._key === value?._key) + 1 || '?';
 </script>
 
-<sup class="footnote-number">[{index}]</sup>
+{#if value}
+  <sup class="footnote-number">[{index}]</sup>
+{/if}
 
 <slot />
 

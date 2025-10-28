@@ -19,7 +19,7 @@
     {#each children as child}
       {#if typeof child === 'string'}
         {child}
-      {:else if child.text}
+      {:else if child?.text}
         {child.text}
       {/if}
     {/each}
